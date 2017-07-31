@@ -45,7 +45,28 @@ def airodump():
     if opt_Choice == "1":
         os.system('clear')
         # os.system("gnome-terminal -e 'bash -c \"python /root/Cylon-Raider-Lite/CrackHead_Recon.py; exec bash\"'")
-        os.system("python /root/Cylon-Raider-Lite/CrackHead_Recon.py")
+        print """
+
+        What type of scanning would you like to use?
+
+        1. DEFAULT, Scan for WPA/WPA2 routers, use wlan1mon as monitor mode interface, enumerate by MAC addr and manufacturer, activate decloakers
+
+
+        2. ADVANCED, By answering a few questions... scan specifically for certain types of routers, encryption standards, ESSID strings, etc, with decloakers running.
+
+
+        """
+
+        opt_Choice = int(raw_input("Enter a OPTION: "))
+
+        if opt_Choice == 1:
+            airmon()
+            os.system("python /root/Cylon-Raider-Lite/CrackHead_Recon.py")
+        elif opt_Choice == 2:
+            os.system("python /root/Cylon-Raider-Lite/airodump_upgrade.py")
+        else:
+            print 'You have entered a invalid option'
+            airodump()
         airodump()
     elif opt_Choice == "0":
         os.system('clear')
@@ -139,6 +160,34 @@ def mana_toolkit():
 def replay_attack():
     os.system('python /root/Cylon-Raider-Lite/Raider_Targeted.py')
     main()
+
+def info_gather():
+    os.system('clear')
+    # os.system("gnome-terminal -e 'bash -c \"python /root/Cylon-Raider-Lite/CrackHead_Recon.py; exec bash\"'")
+    print """
+
+    What type of scanning would you like to use?
+
+    1. DEFAULT, Scan for WPA/WPA2 routers, use wlan1mon as monitor mode interface, enumerate by MAC addr and manufacturer, activate decloakers
+
+
+    2. ADVANCED, By answering a few questions... scan specifically for certain types of routers, encryption standards, ESSID strings, etc, with decloakers running.
+
+
+    """
+
+    opt_Choice = int(raw_input("Enter a OPTION: "))
+
+    if opt_Choice == 1:
+        cmd_String = "airmon-ng start wlan1"
+        os.system("python /root/Cylon-Raider-Lite/CrackHead_Recon.py")
+    elif opt_Choice == 2:
+        os.system("python /root/Cylon-Raider-Lite/airodump_upgrade.py")
+    else:
+        print 'You have entered a invalid option'
+        info_gather()
+    info_gather()
+    return
 def main():
     opt_List = [
         '\n\t#1. AIRMON, start up the capture interface',
@@ -160,7 +209,7 @@ def main():
         airmon()
     elif opt_Choice == "2":
         os.system('clear')
-        os.system("python /root/Cylon-Raider-Lite/CrackHead_Recon.py")
+        info_gather()
     elif opt_Choice == "3":
         os.system('clear')
         replay_attack()
